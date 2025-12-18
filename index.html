@@ -93,40 +93,40 @@
 
     <div class="container hidden" id="success-page">
         <img src="sayang.jpeg" alt="Happy">
-        <h1>Yeeayyy!<br>I Loveee Youuu Sooo Muchhh1>
+        <h1>Yeeayyy!<br>I Loveee Youuu Sooo Muchhh
     </div>
 
     <script>
-        const noBtn = document.getElementById('noBtn');
-        const yesBtn = document.getElementById('yesBtn');
-        const mainCard = document.getElementById('main-card');
-        const successPage = document.getElementById('success-page');
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const mainCard = document.getElementById('main-card');
+    const successPage = document.getElementById('success-page');
 
-        // Fungsi kabur khusus HP (biar tidak keluar batas layar)
-        function moveButton() {
-            // Kita batasi area larinya hanya di area layar yang terlihat
-            const padding = 50;
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
-            
-            noBtn.style.left = `${Math.max(padding, x)}px`;
-            noBtn.style.top = `${Math.max(padding, y)}px`;
-        }
+    function moveButton() {
+        // Batasi lari tombol hanya di dalam area yang kecil
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        
+        noBtn.style.position = 'fixed'; // Pastikan dia melayang
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+    }
 
-        // Di HP gunakan 'touchstart' supaya pas disentuh langsung kabur
-        noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Mencegah klik tidak sengaja
-            moveButton();
-        });
+    // Untuk HP: Begitu jari mendekat/menyentuh, dia pindah
+    noBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        moveButton();
+    });
 
-        // Tetap pasang mouseover buat jaga-jaga kalau dibuka di laptop
-        noBtn.addEventListener('mouseover', moveButton);
+    // Untuk Laptop: Begitu kursor mendekat, dia pindah
+    noBtn.addEventListener('mouseover', moveButton);
 
-        yesBtn.addEventListener('click', () => {
-            mainCard.classList.add('hidden');
-            successPage.classList.remove('hidden');
-        });
-    </script>
+    yesBtn.addEventListener('click', () => {
+        mainCard.classList.add('hidden');
+        successPage.classList.remove('hidden');
+    });
+</script>
 </body>
 
 </html>
+
