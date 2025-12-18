@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Special for Christy ✨</title>
+    <style>
+        /* Agar tidak bisa di-scroll saat tombol lari */
+        html, body {
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            background-color: #ffdeeb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 25px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 85%; /* Ukuran pas buat layar HP */
+            max-width: 320px;
+            z-index: 10;
+        }
+
+        /* Ukuran Foto agar proporsional di HP */
+        #gif-container img, #success-page img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 4px solid #ffdeeb;
+        }
+
+        h1 {
+            color: #d81b60;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            height: 50px;
+            position: relative;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            touch-action: manipulation; /* Optimasi buat touch screen */
+        }
+
+        #yesBtn { background-color: #ff69b4; color: white; }
+        
+        #noBtn { 
+            background-color: #fbcfdf; 
+            color: #d81b60; 
+            position: absolute; 
+            transition: 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-card">
+        <div id="gif-container">
+            <img id="main-gif" src="p.png" alt="Christy">
+        </div>
+        <h1>Christy sayang, mau sama aku terus kan yaa? ❤️</h1>
+        <div class="buttons">
+            <button id="yesBtn">Mau!</button>
+            <button id="noBtn">Enggak</button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="success-page">
+        <img src="sayang.jpeg" alt="Happy">
+        <h1>Yeeayyy!<br>I Love You So Much, Christy! ✨❤️</h1>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const mainCard = document.getElementById('main-card');
+        const successPage = document.getElementById('success-page');
+
+        // Fungsi kabur khusus HP (biar tidak keluar batas layar)
+        function moveButton() {
+            // Kita batasi area larinya hanya di area layar yang terlihat
+            const padding = 50;
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
+            
+            noBtn.style.left = `${Math.max(padding, x)}px`;
+            noBtn.style.top = `${Math.max(padding, y)}px`;
+        }
+
+        // Di HP gunakan 'touchstart' supaya pas disentuh langsung kabur
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Mencegah klik tidak sengaja
+            moveButton();
+        });
+
+        // Tetap pasang mouseover buat jaga-jaga kalau dibuka di laptop
+        noBtn.addEventListener('mouseover', moveButton);
+
+        yesBtn.addEventListener('click', () => {
+            mainCard.classList.add('hidden');
+            successPage.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
